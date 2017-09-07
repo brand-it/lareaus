@@ -7,7 +7,7 @@ jobs:
   test:
     docker:
       # specify the version you desire here
-       - image: circleci/ruby:2.4.1-node-browsers
+      - image: circleci/ruby:2.4.1-node-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -50,15 +50,25 @@ jobs:
 
       # collect reports
       - store_test_results:
-          path: /tmp/test-results
+        path: /tmp/test-results
       - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+        path: /tmp/test-results
+        destination: test-results
   deploy:
-    production:
-      branch: master
-      heroku:
-        appname: limitless-earth-54218
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
+    working_directory: ~/repo
+    steps:
+      - run: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:UU7iXV+liwDH6EP1tVnedTTgo8cWcCjHjR4yYvDcs6M"
+      - deploy:
+          name: Deploy To Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git push heroku master
+            fi
 workflows:
   version: 2
   test_and_deploy:

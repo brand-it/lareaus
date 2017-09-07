@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec_junit_formatter'
   gem 'rubocop'
+  gem 'awesome_print'
 end
 
 group :development do
