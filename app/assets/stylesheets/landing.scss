@@ -1,0 +1,42 @@
+.background-one-low-quality {
+  background-image: <= Base64.encode64('test') %>;
+}
+
+.background-one-high-quality {
+  background-image: image-url('bg-1.jpg');
+}
+#background-one {
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .jumbotron {
+    padding-top: 20vh;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.80);
+    .container {
+      color: rgb(255, 255, 255);
+      .lead {
+        color: #acb1b4
+      }
+    }
+  }
+  .brandt-lg {
+    height: 265px;
+  }
+}
+
+#background-two {
+  background-image: image-url('bg-2-low-quality.jpg');
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .jumbotron {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
