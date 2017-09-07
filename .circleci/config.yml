@@ -61,9 +61,9 @@ jobs:
         appname: limitless-earth-54218
 workflows:
   version: 2
-  test-and-deploy:
+  TEST_FILESand_deploy:
     jobs:
       - test
       - deploy:
         requires:
-          - build
+          - test
