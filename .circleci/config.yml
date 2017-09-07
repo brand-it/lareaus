@@ -56,6 +56,6 @@ jobs:
           destination: test-results
 deployment:
   production:
-g    branch: master
+    branch: master
     heroku:
       appname: limitless-earth-54218
