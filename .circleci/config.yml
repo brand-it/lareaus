@@ -50,10 +50,10 @@ jobs:
 
       # collect reports
       - store_test_results:
-        path: /tmp/test-results
+          path: /tmp/test-results
       - store_artifacts:
-        path: /tmp/test-results
-        destination: test-results
+          path: /tmp/test-results
+          destination: test-results
   deploy:
     docker:
       - image: circleci/ruby:2.4.1-node-browsers
