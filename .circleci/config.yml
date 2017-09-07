@@ -55,8 +55,6 @@ jobs:
           path: /tmp/test-results
           destination: test-results
   deploy:
-    docker:
-      - image: circleci/ruby:2.4.1-node-browsers
     steps:
       - run: bash .circleci/setup-heroku.sh
       - add_ssh_keys:
