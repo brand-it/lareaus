@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
@@ -54,8 +54,16 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-deployment:
-  production:
-    branch: master
-    heroku:
-      appname: limitless-earth-54218
+  deployment:
+    production:
+      branch: master
+      heroku:
+        appname: limitless-earth-54218
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+      - deploy:
+        requires:
+          - build
