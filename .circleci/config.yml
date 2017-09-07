@@ -54,7 +54,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-  deployment:
+  deploy:
     production:
       branch: master
       heroku:
@@ -64,6 +64,6 @@ workflows:
   test_and_deploy:
     jobs:
       - test
-      - deployment:
+      - deploy:
           requires:
             - test
