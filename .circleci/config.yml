@@ -54,3 +54,8 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+deployment:
+  production:
+g    branch: master
+    heroku:
+      appname: limitless-earth-54218
