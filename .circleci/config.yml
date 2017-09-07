@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
@@ -63,7 +63,7 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - build
+      - test
       - deployment:
-        requires:
-          - test
+          requires:
+            - test
