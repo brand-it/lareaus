@@ -1,10 +1,3 @@
-.background-one-low-quality {
-  background-image: <= Base64.encode64('test') %>;
-}
-
-.background-one-high-quality {
-  background-image: image-url('bg-1.jpg');
-}
 #background-one {
   height: 100%;
   background-attachment: fixed;
@@ -12,6 +5,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  background-image: image-url('bg-1-low-quality.jpg');
   .jumbotron {
     padding-top: 20vh;
     height: 100%;

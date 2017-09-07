@@ -1,0 +1,11 @@
+class Landing
+
+  loadBackgroundImages: ->
+    bg_one = new Image()
+    bg_two = new Image()
+    bg_one.src = "<%= asset_path('bg-1.jpg') %>"
+    bg_two.src = "<%= asset_path('bg-2.jpg') %>"
+
+document.addEventListener "turbolinks:load", ->
+  landing = new Landing()
+  landing.loadBackgroundImages()
