@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def icon(icon_name, options = {})
     options[:type] ||= 'fa'

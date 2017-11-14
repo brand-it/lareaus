@@ -2,10 +2,15 @@
   "name": "lareaus-2_0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "@rails/webpacker": "^3.0.2",
+    "bootstrap": "^3.3.7",
+    "coffeescript": "1.12.7"
   },
   "version": "1.0.0",
   "main": "index.js",
   "author": "Brandt Lareau <brandt.lareau@rackspace.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.4"
+  }
 }
