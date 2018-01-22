@@ -1,10 +1,17 @@
 class Landing
+  replaceImage: (elementId, img) ->
+    debugger
+    element = document.getElementById(elementId)
+    element.style.backgroundImage = "url(#{img.src})"
 
   loadBackgroundImages: ->
     bg_one = new Image()
     bg_two = new Image()
+    bg_one.onload = this.replaceImage('background-one', bg_one)
+    bg_two.onload = this.replaceImage('background-two', bg_two)
     bg_one.src = "<%= asset_path('bg-1.jpg') %>"
     bg_two.src = "<%= asset_path('bg-2.jpg') %>"
+
 
 document.addEventListener "turbolinks:load", ->
   landing = new Landing()

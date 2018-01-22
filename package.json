@@ -1,16 +1,14 @@
 {
-  "name": "lareaus-2_0",
-  "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
-    "bootstrap": "^3.3.7",
-    "coffeescript": "1.12.7"
+    "@rails/webpacker": "^3.2.0",
+    "babel-preset-react": "^6.24.1",
+    "coffeescript": "1.12.7",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react_ujs": "^2.4.3"
   },
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Brandt Lareau <brandt.lareau@rackspace.com>",
-  "license": "MIT",
   "devDependencies": {
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.7"
   }
 }
