@@ -3,22 +3,41 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/ruby:2.4.2-jessie-node-browsers
+#       environment:
+#         PGHOST: 127.0.0.1
+#         PGUSER: loot_user
+#         RAILS_ENV: test
+#     - image: circleci/postgres:9.5-alpine
+#       environment:
+#         POSTGRES_USER: loot_user
+#         POSTGRES_DB: loot_test
+#         POSTGRES_PASSWORD: ""
 jobs:
-  test:
-    docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.4.1-node-browsers
+  setup:
+    <<: *defaults
+    steps:
+      - run:
+          name:  Download cc-test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - cc-test-reporter
+  rspec:
+    <<: *defaults
     steps:
       - checkout
-
+      - attach_workspace:
+          at: ~/repo/tmp
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -36,28 +55,41 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      # run tests!
       - run:
           name: run tests
           command: |
-            mkdir /tmp/test-results
+            mkdir ./tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
             bundle exec rspec --format progress \
                             --format RspecJunitFormatter \
                             --out /tmp/test-results/rspec.xml \
                             --format progress
+      - run:
+          name: format simple cov
+          command: |
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.rspec.json coverage/backend/.resultset.json
 
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - codeclimate.rspec.json
+
+  upload_coverage:
+    <<: *defaults
+    environment:
+      - CC_TEST_REPORTER_ID: 963cc66f1194731138278b6267a4015acdee701528bb73cfb339e939a2eb73bc
+    steps:
+      - attach_workspace:
+          at: ~/repo/tmp
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 1 -o tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
+
   deploy:
-    docker:
-      - image: circleci/ruby:2.4.1-node-browsers
-
+    <<: *defaults
     steps:
       - checkout
       - run: bash .circleci/setup-heroku.sh
@@ -65,16 +97,29 @@ jobs:
           fingerprints:
             - "SHA256:UU7iXV+liwDH6EP1tVnedTTgo8cWcCjHjR4yYvDcs6M"
       - deploy:
-          name: Deploy To Heroku
+          name: Deploying To Heroku
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git push heroku master
-            fi
+            - git push heroku $CIRCLE_BRANCH
+            # - heroku run rake db:migrate
 workflows:
   version: 2
-  test_and_deploy:
+  code_change:
     jobs:
-      - test
-      - deploy:
+      - setup
+      - rspec:
           requires:
-            - test
+            - setup
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - rspec
+      - upload_coverage:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+             - rspec
