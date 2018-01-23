@@ -24,10 +24,10 @@ RSpec.describe ImageHelper, type: :helper do
     end
     context 'src is a required argument' do
       subject { lazy_image_tag(nil, 'blank.jpg') }
-      it { expect{ subject }.to raise_exception 'nil is not a valid asset source' }
+      it { expect { subject }.to raise_exception 'nil is not a valid asset source' }
     end
     context 'should return a nice html tag' do
-      subject { lazy_image_tag('good.jpg', 'blank.jpg',) }
+      subject { lazy_image_tag('good.jpg', 'blank.jpg') }
       it 'returns a full image tag' do
         is_expected.to eq(
           '<img data-src="/images/good.jpg" class="lazy" src="/images/blank.jpg" alt="Blank" />'
@@ -44,7 +44,7 @@ RSpec.describe ImageHelper, type: :helper do
     end
 
     context 'lets me change the alt text' do
-      subject { lazy_image_tag('good.jpg','blank.jpg', tag_options: { alt: 'Custom Alt' }) }
+      subject { lazy_image_tag('good.jpg', 'blank.jpg', tag_options: { alt: 'Custom Alt' }) }
       it 'returns a full image tag' do
         is_expected.to eq(
           '<img alt="Custom Alt" data-src="/images/good.jpg" class="lazy" src="/images/blank.jpg" />'
@@ -52,7 +52,7 @@ RSpec.describe ImageHelper, type: :helper do
       end
     end
     context 'lets me add some host image data if needed' do
-      subject { lazy_image_tag('good.jpg','blank.jpg', img_options: { host: 'http://test.com' }) }
+      subject { lazy_image_tag('good.jpg', 'blank.jpg', img_options: { host: 'http://test.com' }) }
       it 'returns a full image tag' do
         is_expected.to eq(
           '<img data-src="http://test.com/images/good.jpg" class="lazy" src="http://test.com/images/blank.jpg"'\
