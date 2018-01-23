@@ -4,7 +4,7 @@ inherit_from:
 # Common configuration.
 AllCops:
   Exclude:
-    - node_modules
+    - node_modules/**/*
     - newrelic_redis_agent
     - public/reports/**
     - reports/**
