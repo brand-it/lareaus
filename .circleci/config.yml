@@ -99,7 +99,7 @@ jobs:
       - deploy:
           name: Deploying To Heroku
           command: |
-            - git push heroku $CIRCLE_BRANCH
+            git push heroku $CIRCLE_BRANCH
             # - heroku run rake db:migrate
 workflows:
   version: 2
@@ -117,9 +117,5 @@ workflows:
           requires:
             - rspec
       - upload_coverage:
-          filters:
-            branches:
-              only:
-                - master
           requires:
              - rspec
