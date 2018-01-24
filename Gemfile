@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rubocop'
   gem 'selenium-webdriver'
+  gem 'simplecov'
 end
 
 group :development do
