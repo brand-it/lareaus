@@ -109,13 +109,14 @@ workflows:
       - rspec:
           requires:
             - setup
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - rspec
       - upload_coverage:
           requires:
              - rspec
+
+# - deploy:
+#     filters:
+#       branches:
+#         only:
+#           - master
+#     requires:
+#       - rspec
