@@ -48,7 +48,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec_junit_formatter'
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'scss_lint', require: false
   gem 'selenium-webdriver'
   gem 'simplecov'
 end
