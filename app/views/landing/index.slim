@@ -1,37 +1,18 @@
-.background-one
-  section.jumbotron.text-center
-    .container
-      = gravatar_image_tag 'brandt.lareau@gmail.com', alt: 'Brandt Lareau',  class: 'rounded-circle', gravatar: { size: 265  }
-      h1.jumbotron-heading Welcome & Get to Know Brandt
-      = react_component 'HelloWorld', greeting: 'Hello'
-      p.lead
-        | Hi, my name is
-        b<> Brandt
-        | and I am a engineer, I have built this site using Mongo and React. Most of this website design has going into bootstrap and rails. I find these parts to be a huge part of what makes ruby great. I know ruby has a lot of down sides but when it comes to building concepts it has a lot of potental. If You want to leare more scroll down and you can find more about me.
-      p
-        a.btn.btn-primary> href="https://www.linkedin.com/in/brandtlareau/"
-          => icon 'linkedin', type: 'fab'
-          | LinkedIn
-        a.btn.btn-secondary> href="https://github.com/newdark"
-          => icon 'github', type: 'fab'
-          | Github
+.background-one.lazy-load-backgrounds data-background-src=image_path('bg-1.jpg')
+  .container
+    .row
+      .col-sm.text-center
+        = link_to 'https://app.plex.tv/desktop' do
+          = image_tag 'plex/plex-icon-low-quality.jpg', class: 'img-thumbnail lazy-load-img h-50', data: { image_src: image_path('plex/plex-icon.jpg') }
+      .col-sm.text-center
+        = link_to 'http://tautulli.lareaus.com:8181/' do
+          = image_tag 'tautulli/tautulli-icon-low-quality.png', class: 'img-thumbnail lazy-load-img h-50', data: { image_src: image_path('tautulli/tautulli-icon.png') }
 
-.background-two
-  section.jumbotron.text-center
-    .lead
-      h1.jumbotron-heading Experience
-      hr
-    .container
-      .row
-        .col
-          => lazy_image_tag 'rackspace.png'
-        .col-10
-          strong> Rackspace
-          span.text-muted Software Developer
-          br
-          | Dates Employed : Aug 2012 – Present
-          =<> icon 'dot-circle', type: 'fal'
-          = time_ago_in_words(Time.parse('2012-08-01'))
-          br
-          | Location:
-          =< link_to 'San Antonio, TX', 'https://goo.gl/maps/LREQYeBXoxP2', target: :blank
+  / section.jumbotron.text-center
+  /   .container
+  /     = gravatar_image_tag 'brandt.lareau@gmail.com', alt: 'Brandt Lareau',  class: 'rounded-circle', gravatar: { size: 265  }
+  /     h1.jumbotron-heading My Applications
+  /     p.lead
+  /       | Hi, my name is
+  /       b<> Brandt
+  /       | and I am a engineer, I have built this site using Mongo and React. Most of this website design has going into bootstrap and rails. I find these parts to be a huge part of what makes ruby great. I know ruby has a lot of down sides but when it comes to building concepts it has a lot of potental. If You want to leare more scroll down and you can find more about me.
