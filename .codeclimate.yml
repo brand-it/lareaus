@@ -23,4 +23,6 @@ exclude_patterns:
   - "**.png"
   - "**.svg"
   - "db/schema.rb"
+  - "**.slim"
+  - "**.coffee"
 version: "2"
