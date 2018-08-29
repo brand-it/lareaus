@@ -15,7 +15,6 @@ module ApplicationHelper
 
   private
 
-
   def icon_class_size(size)
     return if size.blank?
     check_icon_size(size)
@@ -28,9 +27,7 @@ module ApplicationHelper
   end
 
   def check_icon_size(size)
-    sizes = ['xs', 'sm', 'lg', '2', '3', '5', '7', '10']
-    unless sizes.include?(size)
-      raise "#{size.inspect} is not valid please pick from list #{sizes.join(', ')}"
-    end
+    sizes = %w[xs sm lg 2 3 5 7 10]
+    raise "#{size.inspect} is not valid please pick from list #{sizes.join(', ')}" unless sizes.include?(size)
   end
 end
