@@ -1,12 +1,16 @@
 .background-one.lazy-load-backgrounds data-background-src=image_path('bg-1.jpg')
-  .container
+  .container.text-center
     .row
-      .col-sm.text-center
-        = link_to 'https://app.plex.tv/desktop' do
-          = image_tag 'plex/plex-icon-low-quality.jpg', class: 'img-thumbnail lazy-load-img h-50', data: { image_src: image_path('plex/plex-icon.jpg') }
-      .col-sm.text-center
-        = link_to 'http://tautulli.lareaus.com:8181/' do
-          = image_tag 'tautulli/tautulli-icon-low-quality.png', class: 'img-thumbnail lazy-load-img h-50', data: { image_src: image_path('tautulli/tautulli-icon.png') }
+      .col-sm
+        figure.figure
+          = link_to 'https://app.plex.tv/desktop' do
+            = image_tag 'plex/plex-icon-low-quality.jpg', class: 'figure-img img-fluid img-thumbnail scaled-hover lazy-load-img', width: 300, height: 300, data: { image_src: image_path('plex/plex-icon.jpg') }
+          figcaption.figure-caption PLEX
+      .col-sm
+        figure.figure
+          = link_to 'http://tautulli.lareaus.com:8181/' do
+            = image_tag 'tautulli/tautulli-icon-low-quality.png', class: 'figure-img img-fluid img-thumbnail scaled-hover lazy-load-img', width: 300, height: 300, data: { image_src: image_path('tautulli/tautulli-icon.png') }
+          figcaption.figure-caption Tautulli
 
   / section.jumbotron.text-center
   /   .container
