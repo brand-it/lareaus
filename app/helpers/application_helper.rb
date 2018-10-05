@@ -17,6 +17,7 @@ module ApplicationHelper
 
   def icon_class_size(size)
     return if size.blank?
+
     check_icon_size(size)
     "fa-#{size}"
   end
