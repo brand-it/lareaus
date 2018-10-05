@@ -88,19 +88,29 @@ jobs:
             ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 1 -o tmp/codeclimate.total.json
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
 
+  # deploy:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - run: bash .circleci/setup-heroku.sh
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "SHA256:UU7iXV+liwDH6EP1tVnedTTgo8cWcCjHjR4yYvDcs6M"
+  #     - deploy:
+  #         name: Deploying To Heroku
+  #         command: |
+  #           git push heroku $CIRCLE_BRANCH
+  #           # - heroku run rake db:migrate
+
   deploy:
-    <<: *defaults
+    docker:
+      - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run: bash .circleci/setup-heroku.sh
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:UU7iXV+liwDH6EP1tVnedTTgo8cWcCjHjR4yYvDcs6M"
-      - deploy:
-          name: Deploying To Heroku
+      - run:
+          name: Deploy Master to Heroku
           command: |
-            git push heroku $CIRCLE_BRANCH
-            # - heroku run rake db:migrate
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
   code_change:
