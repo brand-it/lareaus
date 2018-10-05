@@ -1,7 +1,15 @@
 @import 'color_variables';
 @import 'bootstrap';
 @import 'landing';
+@import 'lazy_loading';
 
 .max-height {
   height: 100%;
+}
+
+.footer {
+  background-color: $footer-bg-color;
+  color: $gray;
+  height: 60px;
+  line-height: 60px;
 }

@@ -1,3 +1,4 @@
+
 .background-one {
   background-attachment: fixed;
   background-image: image-url('bg-1-low-quality.jpg');
@@ -7,19 +8,12 @@
   height: 100%;
   position: relative;
 
-  .jumbotron {
-    background-color: rgba($black, .8);
+  .container {
+    color: $white;
     height: 100%;
-    padding-top: 20vh;
+    padding-top: 5vh;
 
-    .container {
-      color: $white;
-    }
   }
-}
-
-.container .lead {
-  color: $light-gray;
 }
 
 .background-two {
